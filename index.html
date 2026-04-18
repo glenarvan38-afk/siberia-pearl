@@ -7,180 +7,274 @@
 <meta name="description" content="Площадка для строительства складской и индустриальной недвижимости в Ангарском городском округе. 60 Га, отличная транспортная доступность.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#ffffff;
-  --bg-dark:#1a1f36;
-  --bg-nav:rgba(240,242,248,0.9);
+  --bg:#fafaf8;
+  --bg-warm:#f4f1eb;
+  --bg-dark:#0d1117;
+  --bg-dark2:#131923;
   --text:#1a1a2e;
-  --text-light:#555;
-  --text-muted:#888;
-  --accent:#c8a84e;
-  --accent-dark:#b8952e;
-  --border:#e5e7eb;
-  --font-display:'Cormorant Garamond',Georgia,serif;
-  --font-body:'Inter',sans-serif;
-  --max-w:1100px;
+  --text-light:#5a6070;
+  --text-muted:#9ca3af;
+  --accent:#c49a3c;
+  --accent-light:#d4aa4c;
+  --accent-dark:#a8832e;
+  --border:#e5e0d8;
+  --font-d:'Playfair Display',Georgia,serif;
+  --font-b:'Inter',sans-serif;
+  --max-w:1140px;
+  --nav-h:70px;
 }
 html{scroll-behavior:smooth}
-body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.7;font-weight:300}
+body{font-family:var(--font-b);background:var(--bg);color:var(--text);line-height:1.7;font-weight:300;overflow-x:hidden}
 
 /* NAV */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--bg-nav);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:60px}
-.nav-logo{font-family:var(--font-display);font-weight:600;font-size:1.1rem;color:var(--text);text-decoration:none;font-style:italic}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);display:flex;align-items:center;padding:0 2.5rem;transition:background .4s,border-color .4s,box-shadow .4s;background:transparent;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(250,250,248,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:var(--border);box-shadow:0 1px 20px rgba(0,0,0,.06)}
+.nav-inner{max-width:var(--max-w);margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--font-d);font-weight:600;font-size:1.05rem;color:#fff;text-decoration:none;letter-spacing:.06em;transition:color .4s;white-space:nowrap}
+.nav.scrolled .nav-logo{color:var(--text)}
 .nav-links{display:flex;gap:2rem;align-items:center}
-.nav-links a{color:var(--text-light);text-decoration:none;font-size:.85rem;font-weight:400;transition:color .2s}
-.nav-links a:hover{color:var(--text)}
-.lang-switch{display:flex;gap:.5rem;margin-left:1rem}
-.lang-switch button{background:none;border:none;color:var(--text-muted);font-size:.85rem;font-weight:500;cursor:pointer;padding:2px 6px;transition:color .2s}
-.lang-switch button.active{color:var(--text);font-weight:600}
-.burger{display:none;background:none;border:none;cursor:pointer;padding:4px}
-.burger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;transition:all .3s}
+.nav-links a{color:rgba(255,255,255,.82);text-decoration:none;font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:color .25s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--accent);transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.nav-links a:hover{color:#fff}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav.scrolled .nav-links a{color:var(--text-light)}
+.nav.scrolled .nav-links a:hover{color:var(--text)}
+.lang-switch{display:flex;margin-left:1.5rem;border:1px solid rgba(255,255,255,.25);border-radius:2px;overflow:hidden}
+.nav.scrolled .lang-switch{border-color:var(--border)}
+.lang-switch button{background:none;border:none;color:rgba(255,255,255,.6);font-size:.72rem;font-weight:600;letter-spacing:.06em;cursor:pointer;padding:5px 11px;transition:all .2s;font-family:var(--font-b)}
+.lang-switch button.active{background:var(--accent);color:#fff}
+.nav.scrolled .lang-switch button:not(.active){color:var(--text-muted)}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.burger span{display:block;width:22px;height:1.5px;background:#fff;transition:all .3s}
+.nav.scrolled .burger span{background:var(--text)}
+.burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 
 /* HERO */
-.hero{position:relative;height:100vh;min-height:600px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;text-align:center;color:#fff}
-.hero-bg{position:absolute;inset:0;z-index:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover}
-.hero-bg::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.4)}
-.hero-content{position:relative;z-index:1;padding:0 2rem;max-width:900px}
-.hero h1{font-family:var(--font-display);font-weight:400;font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.1;margin-bottom:1.5rem;letter-spacing:.02em;text-transform:uppercase}
-.hero-sub{font-size:clamp(.95rem,2vw,1.2rem);font-weight:300;opacity:.9;max-width:600px;margin:0 auto}
+.hero{position:relative;height:100vh;min-height:640px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;text-align:center;color:#fff}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-bg img{width:100%;height:120%;object-fit:cover;display:block;will-change:transform}
+.hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(0,0,0,.42) 0%,rgba(0,0,0,.30) 55%,rgba(0,0,0,.62) 100%)}
+.hero-content{position:relative;z-index:2;padding:0 2rem;max-width:960px}
+.hero-eyebrow{font-size:.72rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:1.8rem;opacity:0;animation:fadeUp .8s .3s forwards}
+.hero h1{font-family:var(--font-d);font-weight:700;font-size:clamp(2.8rem,7.5vw,5.8rem);line-height:1.02;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.8rem;opacity:0;animation:fadeUp .8s .55s forwards}
+.hero-divider{width:55px;height:2px;background:var(--accent);margin:1.6rem auto;opacity:0;animation:fadeUp .8s .7s forwards}
+.hero-sub{font-size:clamp(.88rem,1.8vw,1.05rem);font-weight:300;color:rgba(255,255,255,.88);max-width:500px;margin:0 auto;line-height:1.75;opacity:0;animation:fadeUp .8s .85s forwards}
 
-/* STATS */
-.stats{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);max-width:1000px;margin:0 auto;padding:3rem 2rem 2rem;text-align:center}
-.stat{padding:1rem}
-.stat-num{font-family:var(--font-display);font-weight:700;font-size:clamp(2rem,5vw,3.5rem);color:#fff;line-height:1.1}
-.stat-bar{width:80px;height:3px;background:var(--accent);margin:1rem auto .8rem}
-.stat-desc{font-size:.8rem;font-weight:300;color:rgba(255,255,255,.8);line-height:1.5}
+/* STATS BAR */
+.stats-bar{position:absolute;bottom:0;left:0;right:0;z-index:2;background:rgba(10,13,20,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.stats-inner{max-width:100%;display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:1.6rem 2rem;border-right:1px solid rgba(255,255,255,.07);text-align:center}
+.stat:last-child{border-right:none}
+.stat-num{font-family:var(--font-d);font-weight:700;font-size:clamp(1.7rem,3.5vw,2.8rem);color:#fff;line-height:1;margin-bottom:.5rem}
+.stat-bar{width:28px;height:2px;background:var(--accent);margin:.55rem auto}
+.stat-desc{font-size:.7rem;font-weight:300;color:rgba(255,255,255,.55);line-height:1.5;letter-spacing:.02em}
 
 /* SECTIONS */
-.section{padding:5rem 2rem}
-.section-inner{max-width:var(--max-w);margin:0 auto}
-.section-center{text-align:center}
-.section-title{font-family:var(--font-display);font-weight:700;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--text);line-height:1.2;margin-bottom:1rem}
-.section-subtitle{font-size:1rem;color:var(--text-light);max-width:700px;margin:0 auto;line-height:1.8}
-.section-text{font-size:1rem;color:var(--text-light);line-height:1.9;max-width:750px;margin:0 auto;text-align:center}
-.section-text strong{color:var(--text);font-weight:600}
+.sec{padding:6rem 2rem}
+.sec-inner{max-width:var(--max-w);margin:0 auto}
+.sec-ctr{text-align:center}
+.sec-label{display:block;font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.sec-title{font-family:var(--font-d);font-weight:700;font-size:clamp(1.9rem,4vw,3rem);color:var(--text);line-height:1.15;margin-bottom:1.2rem}
+.sec-sub{font-size:.95rem;color:var(--text-light);max-width:680px;margin:0 auto;line-height:1.85}
+.sec-text{font-size:1rem;color:var(--text-light);line-height:1.95;max-width:760px;margin:0 auto;text-align:center}
+.sec-text strong{color:var(--text);font-weight:600}
+.gold-line{width:48px;height:2px;background:var(--accent);margin:1.5rem auto}
+
+/* ABOUT */
+.about-sec{background:var(--bg);padding:7rem 2rem;text-align:center}
 
 /* MAP */
-.map-section{padding:3rem 2rem}
-.map-section .section-inner{max-width:var(--max-w);margin:0 auto}
-.map-container{width:100%;height:500px;position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
-.map-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-.map-overlay{position:absolute;inset:0;z-index:2;cursor:pointer}
+.map-sec{background:var(--bg-warm);padding:0 2rem 5rem}
+.map-holder{max-width:var(--max-w);margin:0 auto;height:500px;position:relative;border-radius:3px;overflow:hidden;border:1px solid var(--border);box-shadow:0 4px 28px rgba(0,0,0,.08)}
+.map-holder iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.map-overlay{position:absolute;inset:0;z-index:2;cursor:pointer;background:transparent}
 .map-overlay.active{pointer-events:none}
 
 /* CAROUSEL */
-.carousel{position:relative;width:100%;overflow:hidden}
-.carousel-track{display:flex;transition:transform .6s ease}
-.carousel-slide{min-width:100%;position:relative}
-.carousel-slide img{width:100%;height:85vh;min-height:500px;object-fit:cover;display:block}
-.carousel-caption{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-family:var(--font-display);font-size:1.5rem;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5);letter-spacing:.05em}
-.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%;background:var(--accent);border:none;color:#fff;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:2}
-.carousel-btn:hover{background:var(--accent-dark)}
-.carousel-btn.prev{left:1.5rem}
-.carousel-btn.next{right:1.5rem}
+.carousel{position:relative;width:100%;overflow:hidden;background:#000}
+.car-track{display:flex;transition:transform .75s cubic-bezier(.25,.46,.45,.94)}
+.car-slide{min-width:100%;position:relative}
+.car-slide img{width:100%;height:88vh;min-height:480px;object-fit:cover;display:block;opacity:.87}
+.car-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.52) 0%,transparent 55%)}
+.car-caption{position:absolute;bottom:3rem;left:3rem;z-index:1;text-align:left}
+.car-caption-label{display:block;font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
+.car-caption-title{font-family:var(--font-d);font-size:1.5rem;font-weight:600;color:#fff;letter-spacing:.06em;text-shadow:0 2px 12px rgba(0,0,0,.4)}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:rgba(0,0,0,.28);backdrop-filter:blur(8px);color:#fff;font-size:1.15rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .22s;z-index:3}
+.car-btn:hover{background:var(--accent);border-color:var(--accent)}
+.car-btn.prev{left:2rem}
+.car-btn.next{right:2rem}
+.car-dots{position:absolute;bottom:1.8rem;right:3rem;z-index:3;display:flex;gap:6px;align-items:center}
+.car-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.35);border:none;cursor:pointer;padding:0;transition:all .22s}
+.car-dot.active{background:var(--accent);transform:scale(1.25)}
 
-/* DIRECTIONS - dark section */
-.directions{background:var(--bg-dark);color:#fff;padding:5rem 2rem}
-.directions .section-title{color:#fff}
-.directions .section-subtitle{color:rgba(255,255,255,.7)}
-.dir-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:3rem}
-.dir-card{overflow:hidden}
-.dir-card-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
-.dir-card-body{padding:1.5rem}
-.dir-card-body h3{font-family:var(--font-display);font-size:1.2rem;font-weight:700;margin-bottom:.6rem}
-.dir-card-body p{font-size:.85rem;font-weight:300;color:var(--accent);line-height:1.6}
-.dir-single{max-width:380px;margin-top:2rem}
+/* DIRECTIONS */
+.dir-sec{background:var(--bg-dark);color:#fff;padding:6rem 2rem}
+.dir-sec .sec-title{color:#fff}
+.dir-sec .sec-sub{color:rgba(255,255,255,.5)}
+.dir-sec .sec-label{color:var(--accent)}
+.dir-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-top:3.5rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.05);border-radius:3px;overflow:hidden}
+.dir-card{background:var(--bg-dark2);transition:background .3s}
+.dir-card:hover{background:#1a2235}
+.dir-card-img-wrap{overflow:hidden;height:215px}
+.dir-card-img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;display:block}
+.dir-card:hover .dir-card-img{transform:scale(1.06)}
+.dir-card-body{padding:1.8rem 2rem;border-top:1px solid rgba(255,255,255,.05)}
+.dir-accent{width:28px;height:2px;background:var(--accent);margin-bottom:.9rem;transition:width .3s}
+.dir-card:hover .dir-accent{width:46px}
+.dir-card-body h3{font-family:var(--font-d);font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:.7rem;line-height:1.3}
+.dir-card-body p{font-size:.8rem;font-weight:300;color:rgba(255,255,255,.5);line-height:1.7}
+
+/* AGGLOMERATION */
+.aglo-sec{background:var(--bg);padding:6rem 2rem;text-align:center}
 
 /* OWNERSHIP */
-.ownership{display:grid;grid-template-columns:1fr 1.2fr;gap:0;align-items:stretch;margin-top:2rem}
-.ownership-text{padding:3rem 2.5rem;display:flex;flex-direction:column;justify-content:center}
-.ownership-text h2{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2rem);font-weight:700;text-transform:uppercase;margin-bottom:1.5rem;line-height:1.3}
-.ownership-text p{font-size:.85rem;color:var(--text-light);line-height:1.8;text-transform:uppercase;font-weight:400}
-.ownership-img img{width:100%;height:100%;object-fit:cover;display:block}
+.own-sec{background:var(--bg-warm)}
+.own-grid{display:grid;grid-template-columns:1fr 1.15fr;align-items:stretch}
+.own-text{padding:5rem 3rem 5rem 5rem;display:flex;flex-direction:column;justify-content:center}
+.own-text .sec-label{text-align:left}
+.own-text h2{font-family:var(--font-d);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;text-transform:uppercase;line-height:1.2;margin-bottom:1.2rem;color:var(--text)}
+.own-text .gold-line{margin:0 0 1.5rem}
+.own-text p{font-size:.88rem;color:var(--text-light);line-height:1.95}
+.own-img{position:relative;overflow:hidden;min-height:420px}
+.own-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.own-sec:hover .own-img img{transform:scale(1.04)}
 
 /* NEWS */
-.news-list{margin-top:3rem}
-.news-item{display:grid;grid-template-columns:200px 1fr;gap:2rem;align-items:start;padding:2rem 0;border-bottom:1px solid var(--border)}
-.news-item:first-child{padding-top:0}
-.news-item:last-child{border-bottom:none}
-.news-item-img{width:200px;height:140px;object-fit:cover;border-radius:4px}
-.news-item-body h3{font-family:var(--font-display);font-size:1.2rem;font-weight:700;margin-bottom:.5rem;line-height:1.3}
-.news-item-body p{font-size:.9rem;color:var(--text-light);line-height:1.6;margin-bottom:.5rem}
-.news-item-date{font-size:.8rem;color:var(--text-muted)}
+.news-sec{background:var(--bg);padding:6rem 2rem}
+.news-list{margin-top:3.5rem}
+.news-item{display:grid;grid-template-columns:230px 1fr;gap:2.5rem;align-items:start;padding:2.5rem 0;border-bottom:1px solid var(--border)}
+.news-item:first-child{border-top:1px solid var(--border)}
+.news-img-wrap{overflow:hidden;border-radius:2px}
+.news-img{width:230px;height:155px;object-fit:cover;display:block;transition:transform .5s}
+.news-item:hover .news-img{transform:scale(1.04)}
+.news-tag{display:block;font-size:.66rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem}
+.news-item h3{font-family:var(--font-d);font-size:1.1rem;font-weight:600;margin-bottom:.65rem;line-height:1.35;color:var(--text)}
+.news-item p{font-size:.86rem;color:var(--text-light);line-height:1.7}
+.news-item p a{color:var(--accent-dark);font-weight:500}
 
-/* TRANSPORT TEXT */
-.transport-text{padding:5rem 2rem;text-align:center}
-.transport-text p{font-family:var(--font-display);font-size:clamp(1.1rem,2.5vw,1.4rem);font-style:italic;color:var(--text-light);max-width:750px;margin:0 auto;line-height:1.8}
-.transport-text strong{color:var(--text);font-weight:700;font-style:normal}
+/* TRANSPORT QUOTE */
+.tq-sec{background:var(--bg-dark);padding:7rem 2rem;text-align:center}
+.tq-sec .gold-line{margin-bottom:3rem}
+.tq-sec blockquote{font-family:var(--font-d);font-style:italic;font-size:clamp(1.15rem,2.6vw,1.75rem);color:rgba(255,255,255,.82);max-width:820px;margin:0 auto;line-height:1.72;position:relative}
+.tq-sec blockquote strong{color:#fff;font-style:normal;font-weight:600}
+.tq-sec .gold-line.bottom{margin-top:3rem;margin-bottom:0}
 
 /* GEOLOGY */
-.geology{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
-.geology img{width:100%;border:1px solid var(--border);cursor:pointer;transition:transform .3s}
-.geology img:hover{transform:scale(1.01)}
+.geo-sec{background:var(--bg-warm);padding:6rem 2rem}
+.geo-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+.geo-item{position:relative;overflow:hidden;border-radius:3px;border:1px solid var(--border);cursor:zoom-in}
+.geo-item img{width:100%;display:block;transition:transform .5s}
+.geo-item:hover img{transform:scale(1.03)}
+.geo-overlay{position:absolute;inset:0;background:rgba(10,13,20,0);display:flex;align-items:center;justify-content:center;transition:background .3s}
+.geo-item:hover .geo-overlay{background:rgba(10,13,20,.32)}
+.geo-overlay svg{opacity:0;transform:scale(.7);transition:all .3s;fill:#fff;width:46px;height:46px}
+.geo-item:hover .geo-overlay svg{opacity:1;transform:scale(1)}
 
 /* GPZU */
-.gpzu-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-top:2rem}
-.gpzu-img img{width:100%;border:1px solid var(--border);display:block;cursor:pointer;border-radius:4px}
-.gpzu-text h3{font-family:var(--font-display);font-size:1.4rem;font-weight:700;margin-bottom:1rem;line-height:1.3}
-.gpzu-text p{font-size:.9rem;color:var(--text-light);line-height:1.8}
+.gpzu-sec{background:var(--bg);padding:6rem 2rem}
+.gpzu-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:4rem;align-items:start;margin-top:2.5rem}
+.gpzu-text .sec-label{text-align:left}
+.gpzu-text h3{font-family:var(--font-d);font-size:1.45rem;font-weight:600;margin-bottom:1.2rem;line-height:1.35;color:var(--text)}
+.gpzu-text p{font-size:.88rem;color:var(--text-light);line-height:1.95}
+.gpzu-img{overflow:hidden;border:1px solid var(--border);border-radius:3px;cursor:zoom-in;box-shadow:0 4px 20px rgba(0,0,0,.07)}
+.gpzu-img img{width:100%;display:block;transition:transform .5s}
+.gpzu-img:hover img{transform:scale(1.02)}
 
 /* CONTACTS */
-.contacts-section{text-align:center}
-.contacts-info{margin-top:2rem;font-size:1rem;color:var(--text-light);line-height:1.8}
-.contacts-email{margin-top:1.5rem;font-weight:600;color:var(--text)}
-.contacts-email a{color:var(--text);text-decoration:none}
-.tg-icon{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:#000;margin-top:2rem}
-.tg-icon svg{fill:#fff;width:24px;height:24px}
+.ct-sec{background:var(--bg-dark);padding:7rem 2rem;text-align:center;color:#fff}
+.ct-sec .sec-title{color:#fff}
+.ct-sec .sec-label{color:var(--accent)}
+.ct-desc{font-size:.92rem;color:rgba(255,255,255,.55);max-width:520px;margin:1.5rem auto 3rem;line-height:1.82}
+.ct-email-wrap{display:inline-flex;flex-direction:column;align-items:center;gap:.45rem;margin-bottom:2.5rem}
+.ct-label{font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.ct-email{font-family:var(--font-d);font-size:1.45rem;font-weight:600;color:#fff;text-decoration:none;transition:color .2s}
+.ct-email:hover{color:var(--accent)}
+.tg-btn{display:inline-flex;align-items:center;gap:.65rem;padding:.85rem 2rem;background:transparent;border:1px solid rgba(255,255,255,.18);border-radius:2px;color:rgba(255,255,255,.75);text-decoration:none;font-size:.76rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:all .25s}
+.tg-btn:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.38);color:#fff}
+.tg-btn svg{fill:currentColor;width:17px;height:17px;flex-shrink:0}
 
 /* FOOTER */
-.footer{padding:2rem;text-align:center;font-size:.75rem;color:var(--text-muted);border-top:1px solid var(--border)}
+.footer{background:var(--bg-dark);border-top:1px solid rgba(255,255,255,.06);padding:2rem;text-align:center}
+.footer p{font-size:.73rem;color:rgba(255,255,255,.28);letter-spacing:.04em}
+.footer span{color:rgba(255,255,255,.45)}
 
 /* LIGHTBOX */
-.lightbox{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.92);align-items:center;justify-content:center;cursor:zoom-out}
+.lightbox{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.94);align-items:center;justify-content:center;padding:2rem}
 .lightbox.active{display:flex}
-.lightbox img{max-width:95vw;max-height:95vh;object-fit:contain}
-.lightbox-close{position:absolute;top:1rem;right:1rem;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:1.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lightbox img{max-width:95vw;max-height:92vh;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lb-close{position:absolute;top:1.5rem;right:1.5rem;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;line-height:1}
+.lb-close:hover{background:rgba(255,255,255,.2)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.rv.on{opacity:1;transform:none}
+.rv-1{transition-delay:.1s}
+.rv-2{transition-delay:.2s}
+.rv-3{transition-delay:.3s}
+.rv-4{transition-delay:.4s}
+
+/* KEYFRAMES */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 
 /* RESPONSIVE */
+@media(max-width:1024px){
+  .own-text{padding:4rem 2.5rem 4rem 2.5rem}
+  .gpzu-grid{gap:2.5rem}
+}
 @media(max-width:768px){
-  .nav-links{display:none;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(255,255,255,.97);padding:1.5rem 2rem;gap:1rem;border-bottom:1px solid var(--border)}
+  .nav-links{
+    display:none;flex-direction:column;align-items:flex-start;
+    position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;
+    background:rgba(10,13,20,.97);backdrop-filter:blur(20px);
+    padding:3rem 2rem;gap:1.5rem;z-index:999;overflow-y:auto
+  }
   .nav-links.open{display:flex}
-  .burger{display:block}
-  .stats{grid-template-columns:repeat(2,1fr);padding:2rem 1rem 1rem}
-  .stat-num{font-size:clamp(1.5rem,8vw,2.5rem)}
-  .hero h1{font-size:clamp(1.8rem,8vw,3rem)}
-  .hero{min-height:500px}
-  .dir-cards{grid-template-columns:1fr}
-  .ownership{grid-template-columns:1fr}
-  .ownership-text{padding:2rem 1.5rem}
-  .ownership-img img{aspect-ratio:16/9;height:auto}
-  .news-item{grid-template-columns:1fr}
-  .news-item-img{width:100%;height:200px}
-  .geology{grid-template-columns:1fr}
-  .gpzu-grid{grid-template-columns:1fr}
-  .section{padding:3rem 1.5rem}
-  .section-title{font-size:clamp(1.4rem,6vw,2rem)}
-  .carousel-slide img{height:50vh;min-height:300px}
-  .carousel-caption{font-size:1rem;bottom:1rem}
-  .carousel-btn{width:38px;height:38px;font-size:1.1rem}
-  .map-container{height:350px}
-  .transport-text{padding:3rem 1.5rem}
-  .transport-text p{font-size:1rem}
-  .contacts-info{font-size:.9rem}
-  .nav-logo{font-size:.95rem}
-  .about-section .section-text{text-align:left}
+  .nav-links a{color:rgba(255,255,255,.78);font-size:.88rem}
+  .nav-links a:hover{color:var(--accent)}
+  .lang-switch{margin-left:0;margin-top:.5rem;border-color:rgba(255,255,255,.2)}
+  .burger{display:flex}
+  .hero{min-height:580px}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
+  .stat:nth-child(odd){border-right:1px solid rgba(255,255,255,.07)}
+  .stat:nth-last-child(-n+2){border-bottom:none}
+  .sec{padding:4rem 1.5rem}
+  .about-sec{padding:5rem 1.5rem}
+  .dir-grid{grid-template-columns:1fr}
+  .own-grid{display:block}
+  .own-text{padding:3rem 1.5rem}
+  .own-img{min-height:280px}
+  .own-img img{position:static;width:100%;height:280px;object-fit:cover;display:block}
+  .news-item{grid-template-columns:1fr;gap:1.2rem}
+  .news-img{width:100%;height:195px}
+  .geo-grid{grid-template-columns:1fr}
+  .gpzu-grid{grid-template-columns:1fr;gap:2rem}
+  .car-slide img{height:55vh;min-height:300px}
+  .car-caption{bottom:2rem;left:1.5rem}
+  .car-caption-title{font-size:1.1rem}
+  .car-btn{width:40px;height:40px;font-size:1rem}
+  .car-dots{right:1.5rem;bottom:1.2rem}
+  .map-holder{height:360px}
+  .tq-sec blockquote{font-size:1.05rem}
+  .ct-email{font-size:1.1rem}
+  .map-sec{padding:0 1.5rem 4rem}
+}
+@media(max-width:480px){
+  .hero h1{letter-spacing:.02em}
+  .own-text{padding:2.5rem 1.5rem}
 }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav class="nav">
+<nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="#" class="nav-logo" data-ru="Жемчужина Сибири" data-en="Pearl of Siberia">Жемчужина Сибири</a>
     <div class="nav-links" id="navLinks">
@@ -192,112 +286,133 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-he
         <button onclick="setLang('en')">ENG</button>
       </div>
     </div>
-    <button class="burger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+    <button class="burger" id="burger" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<!-- HERO with background photo -->
+<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg">
-    <img src="images/2025-09-25_000848.jpg" alt="Площадка Жемчужина Сибири">
+    <img src="images/2025-09-25_000848.jpg" alt="Площадка Жемчужина Сибири" id="heroBg">
   </div>
+  <div class="hero-overlay"></div>
   <div class="hero-content">
-    <h1 data-ru="Жемчужина Сибири" data-en="Pearl of Siberia">Жемчужина Сибири</h1>
+    <div class="hero-eyebrow" data-ru="Ангарский городской округ · Иркутская область" data-en="Angarsk Urban District · Irkutsk Region">Ангарский городской округ · Иркутская область</div>
+    <h1 data-ru="Жемчужина<br>Сибири" data-en="Pearl<br>of Siberia">Жемчужина<br>Сибири</h1>
+    <div class="hero-divider"></div>
     <p class="hero-sub" data-ru="площадка для строительства складской и индустриальной недвижимости в Ангарском городском округе." data-en="A plot of land for the construction of warehouse and industrial real estate in the Angarsk urban district.">площадка для строительства складской и индустриальной недвижимости в Ангарском городском округе.</p>
   </div>
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-num">60 <span style="font-size:.6em">Га</span></div>
-      <div class="stat-bar"></div>
-      <div class="stat-desc" data-ru="Два смежных участка 14,1 и 44,3 Га" data-en="Two adjacent plots 14.1 and 44.3 Ha">Два смежных участка 14,1 и 44,3 Га</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">5 <span style="font-size:.6em" data-ru="км" data-en="km">км</span></div>
-      <div class="stat-bar"></div>
-      <div class="stat-desc" data-ru="до трассы Р-255&#10;15 км до Иркутска&#10;14 км до Ангарска" data-en="to highway R-255&#10;15 km to Irkutsk&#10;14 km to Angarsk">до трассы Р-255<br>15 км до Иркутска<br>14 км до Ангарска</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">5,250</div>
-      <div class="stat-bar"></div>
-      <div class="stat-desc" data-ru="МВт Подведенная мощность и техусловия" data-en="MW Power supplied and technical specifications">МВт Подведенная мощность<br>и техусловия</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">80%</div>
-      <div class="stat-bar"></div>
-      <div class="stat-desc" data-ru="Процент застройки&#10;Склады" data-en="Development percentage&#10;Warehouses">Процент застройки<br>Склады</div>
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat">
+        <div class="stat-num" data-target="60" data-suffix=" Га">60 Га</div>
+        <div class="stat-bar"></div>
+        <div class="stat-desc" data-ru="Два смежных участка 14,1 и 44,3 Га" data-en="Two adjacent plots 14.1 and 44.3 Ha">Два смежных участка<br>14,1 и 44,3 Га</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="5" data-suffix=" км">5 км</div>
+        <div class="stat-bar"></div>
+        <div class="stat-desc" data-ru="до трассы Р-255 · 15 км до Иркутска · 14 км до Ангарска" data-en="to highway R-255 · 15 km to Irkutsk · 14 km to Angarsk">до трассы Р-255<br>15 км до Иркутска<br>14 км до Ангарска</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5&thinsp;250</div>
+        <div class="stat-bar"></div>
+        <div class="stat-desc" data-ru="МВт — подведённая мощность и технические условия" data-en="MW — power supplied and technical specifications">МВт — подведённая мощность<br>и технические условия</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="80" data-suffix="%">80%</div>
+        <div class="stat-bar"></div>
+        <div class="stat-desc" data-ru="максимальный процент застройки — Склады" data-en="maximum development coverage — Warehouses">максимальный процент застройки<br>Склады</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section class="section" id="about">
-  <div class="section-inner section-center">
-    <h2 class="section-title" data-ru="Идеальная локация для масштабных проектов." data-en="An ideal location for large-scale projects.">Идеальная локация для масштабных проектов.</h2>
-    <p class="section-text" data-ru-html='Промышленная площадка <strong>"Жемчужина Сибири"</strong> площадью 60 гектаров расположена в <strong>Иркутской области, Ангарском городском округе</strong>. Это крупнейший неосвоенный участок в агломерации. Площадка обладает <strong>отличной транспортной доступностью</strong>: рядом проходит федеральная трасса <strong>Р-255</strong> и находится крупная <strong>ж/д станция Мегет</strong>. Готовность к быстрому старту обеспечивается юридической чистотой и полным комплектом разрешительной документации.' data-en-html='The 60-hectare <strong>"Pearl of Siberia"</strong> industrial site is located in the <strong>Angarsk urban district of the Irkutsk region</strong>. It is the largest undeveloped site in the agglomeration. The site enjoys <strong>excellent transport accessibility</strong>, being close to the <strong>R-255</strong> federal highway and the major <strong>Meget railway station</strong>. Legal compliance and a full set of permits ensure a quick start.'>Промышленная площадка <strong>"Жемчужина Сибири"</strong> площадью 60 гектаров расположена в <strong>Иркутской области, Ангарском городском округе</strong>. Это крупнейший неосвоенный участок в агломерации. Площадка обладает <strong>отличной транспортной доступностью</strong>: рядом проходит федеральная трасса <strong>Р-255</strong> и находится крупная <strong>ж/д станция Мегет</strong>. Готовность к быстрому старту обеспечивается юридической чистотой и полным комплектом разрешительной документации.</p>
+<section class="about-sec" id="about">
+  <div class="sec-inner">
+    <span class="sec-label rv" data-ru="О ПРОЕКТЕ" data-en="ABOUT THE PROJECT">О ПРОЕКТЕ</span>
+    <h2 class="sec-title rv" data-ru="Идеальная локация для масштабных проектов." data-en="An ideal location for large-scale projects.">Идеальная локация для масштабных проектов.</h2>
+    <div class="gold-line rv"></div>
+    <p class="sec-text rv"
+      data-ru-html='Промышленная площадка <strong>«Жемчужина Сибири»</strong> площадью 60 гектаров расположена в <strong>Иркутской области, Ангарском городском округе</strong>. Это крупнейший неосвоенный участок в агломерации. Площадка обладает <strong>отличной транспортной доступностью</strong>: рядом проходит федеральная трасса <strong>Р-255</strong> и находится крупная <strong>ж/д станция Мегет</strong>. Готовность к быстрому старту обеспечивается юридической чистотой и полным комплектом разрешительной документации.'
+      data-en-html='The 60-hectare <strong>"Pearl of Siberia"</strong> industrial site is located in the <strong>Angarsk urban district of the Irkutsk region</strong>. It is the largest undeveloped site in the agglomeration. The site enjoys <strong>excellent transport accessibility</strong>, being close to the <strong>R-255</strong> federal highway and the major <strong>Meget railway station</strong>. Legal compliance and a full set of permits ensure a quick start.'>Промышленная площадка <strong>«Жемчужина Сибири»</strong> площадью 60 гектаров расположена в <strong>Иркутской области, Ангарском городском округе</strong>. Это крупнейший неосвоенный участок в агломерации. Площадка обладает <strong>отличной транспортной доступностью</strong>: рядом проходит федеральная трасса <strong>Р-255</strong> и находится крупная <strong>ж/д станция Мегет</strong>. Готовность к быстрому старту обеспечивается юридической чистотой и полным комплектом разрешительной документации.</p>
   </div>
 </section>
 
 <!-- MAP -->
-<section class="map-section">
-  <div class="section-inner">
-    <div class="map-container" id="mapWrap">
-      <div class="map-overlay" id="mapOverlay" onclick="activateMap()"></div>
-      <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A260bab02163d3ce60ad371b0b2b9f91f285aa802151f2d69843e1d08e2b7c4a4&amp;source=constructor&amp;scroll=true" frameborder="0" allowfullscreen></iframe>
-    </div>
+<section class="map-sec">
+  <div class="map-holder rv" id="mapWrap">
+    <div class="map-overlay" id="mapOverlay" onclick="activateMap()"></div>
+    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A260bab02163d3ce60ad371b0b2b9f91f285aa802151f2d69843e1d08e2b7c4a4&amp;source=constructor&amp;scroll=true" frameborder="0" allowfullscreen></iframe>
   </div>
 </section>
 
 <!-- CAROUSEL -->
 <div class="carousel" id="mainCarousel">
-  <div class="carousel-track" id="carouselTrack">
-    <div class="carousel-slide">
+  <div class="car-track" id="carTrack">
+    <div class="car-slide">
       <img src="images/carousel-1.jpg" alt="ЗУ1 38:26:010800:171">
-      <div class="carousel-caption">ЗУ1 38:26:010800:171</div>
+      <div class="car-caption">
+        <span class="car-caption-label" data-ru="земельный участок" data-en="land plot">земельный участок</span>
+        <div class="car-caption-title">ЗУ1 38:26:010800:171</div>
+      </div>
     </div>
-    <div class="carousel-slide">
+    <div class="car-slide">
       <img src="images/carousel-2.jpg" alt="ЗУ2 38:26:010800:173">
-      <div class="carousel-caption">ЗУ2 38:26:010800:173</div>
+      <div class="car-caption">
+        <span class="car-caption-label" data-ru="земельный участок" data-en="land plot">земельный участок</span>
+        <div class="car-caption-title">ЗУ2 38:26:010800:173</div>
+      </div>
     </div>
   </div>
-  <button class="carousel-btn prev" onclick="moveCarousel(-1)">&#8592;</button>
-  <button class="carousel-btn next" onclick="moveCarousel(1)">&#8594;</button>
+  <button class="car-btn prev" onclick="moveCar(-1)" aria-label="Назад">&#8592;</button>
+  <button class="car-btn next" onclick="moveCar(1)" aria-label="Вперёд">&#8594;</button>
+  <div class="car-dots" id="carDots">
+    <button class="car-dot active" onclick="goSlide(0)"></button>
+    <button class="car-dot" onclick="goSlide(1)"></button>
+  </div>
 </div>
 
 <!-- DIRECTIONS -->
-<section class="directions" id="directions">
-  <div class="section-inner section-center">
-    <h2 class="section-title" data-ru="Направления использования" data-en="Directions of Use">Направления использования</h2>
-    <p class="section-subtitle" data-ru="В соответствии с Генеральным планом и ПЗЗ Ангарского городского округа на участках возможно строительство:" data-en="In accordance with the General Plan and Land Use Regulations of the Angarsk Urban District, construction is possible on the following sites:">В соответствии с Генеральным планом и ПЗЗ<br>Ангарского городского округа<br>на участках возможно строительство:</p>
-
-    <div class="dir-cards">
-      <div class="dir-card">
-        <img class="dir-card-img" src="images/gallery-1.jpg" alt="Логистический центр">
+<section class="dir-sec" id="directions">
+  <div class="sec-inner sec-ctr">
+    <span class="sec-label rv" data-ru="ВОЗМОЖНОСТИ ПЛОЩАДКИ" data-en="SITE CAPABILITIES">ВОЗМОЖНОСТИ ПЛОЩАДКИ</span>
+    <h2 class="sec-title rv" data-ru="Направления использования" data-en="Directions of Use">Направления использования</h2>
+    <p class="sec-sub rv"
+      data-ru="В соответствии с Генеральным планом и ПЗЗ Ангарского городского округа на участках возможно строительство:"
+      data-en="In accordance with the General Plan and Land Use Regulations of the Angarsk Urban District, construction is possible on the following sites:">В соответствии с Генеральным планом и ПЗЗ Ангарского городского округа на участках возможно строительство:</p>
+    <div class="dir-grid">
+      <div class="dir-card rv">
+        <div class="dir-card-img-wrap"><img class="dir-card-img" src="images/gallery-1.jpg" alt="Логистический центр"></div>
         <div class="dir-card-body">
+          <div class="dir-accent"></div>
           <h3 data-ru="Логистический распределительный центр" data-en="Logistics Distribution Center">Логистический распределительный центр</h3>
           <p data-ru="BTS под e-com/FMCG: блок-модули 20–30 тыс. м², clear height ≥12 м, нагрузка на пол 6 т/м², доки 1/800–1/1000 м²." data-en="BTS for e-com/FMCG: block modules 20–30K m², clear height ≥12 m, floor load 6 t/m², docks 1/800–1/1000 m².">BTS под e-com/FMCG: блок-модули 20–30 тыс. м², clear height ≥12 м, нагрузка на пол 6 т/м², доки 1/800–1/1000 м².</p>
         </div>
       </div>
-      <div class="dir-card">
-        <img class="dir-card-img" src="images/gallery-2.jpg" alt="Контейнерная площадка">
+      <div class="dir-card rv rv-1">
+        <div class="dir-card-img-wrap"><img class="dir-card-img" src="images/gallery-2.jpg" alt="Контейнерная площадка"></div>
         <div class="dir-card-body">
+          <div class="dir-accent"></div>
           <h3 data-ru="Контейнерная площадка" data-en="Container Site">Контейнерная площадка</h3>
-          <p data-ru="Rail-first логистика: контейнерный терминал + кросс-док возле Мегета. опция тупика/подъездного пути" data-en="Rail-first logistics: container terminal + cross-dock near Meget. Side-end/access track option">Rail-first логистика: контейнерный терминал + кросс-док возле Мегета.<br>опция тупика/подъездного пути</p>
+          <p data-ru="Rail-first логистика: контейнерный терминал + кросс-dok возле Мегета. Опция тупика/подъездного пути." data-en="Rail-first logistics: container terminal + cross-dock near Meget. Side-end/access track option.">Rail-first логистика: контейнерный терминал + кросс-dok возле Мегета. Опция тупика/подъездного пути.</p>
         </div>
       </div>
-      <div class="dir-card">
-        <img class="dir-card-img" src="images/gallery-3.jpg" alt="Офисно-складской комплекс">
+      <div class="dir-card rv rv-2">
+        <div class="dir-card-img-wrap"><img class="dir-card-img" src="images/gallery-3.jpg" alt="Офисно-складской комплекс"></div>
         <div class="dir-card-body">
+          <div class="dir-accent"></div>
           <h3 data-ru="Офисно-складской комплекс" data-en="Office and Warehouse Complex">Офисно-складской комплекс</h3>
           <p data-ru="Региональный 3PL-кластер: мульти-пользовательские корпуса 10–15 тыс. м² с офисными вставками 5–7%." data-en="Regional 3PL cluster: multi-user buildings 10–15K m² with office inserts 5–7%.">Региональный 3PL-кластер: мульти-пользовательские корпуса 10–15 тыс. м² с офисными вставками 5–7%.</p>
         </div>
       </div>
-    </div>
-    <div class="dir-cards" style="grid-template-columns:1fr 1fr 1fr;margin-top:0">
-      <div class="dir-card">
-        <img class="dir-card-img" src="images/gallery-4.jpg" alt="Таможенно-логистический сервис">
+      <div class="dir-card rv rv-3">
+        <div class="dir-card-img-wrap"><img class="dir-card-img" src="images/gallery-4.jpg" alt="Таможенно-логистический сервис"></div>
         <div class="dir-card-body">
+          <div class="dir-accent"></div>
           <h3 data-ru="Таможенно-логистический сервис" data-en="Customs and Logistics Service">Таможенно-логистический сервис</h3>
           <p data-ru="Площадка временного хранения/СВХ (если есть потенциал по ВЭД с Китаем/МНР через приграничные хабы)." data-en="Temporary storage / bonded warehouse (if there is potential for foreign trade with China/Mongolia through border hubs).">Площадка временного хранения/СВХ (если есть потенциал по ВЭД с Китаем/МНР через приграничные хабы).</p>
         </div>
@@ -306,177 +421,298 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-he
   </div>
 </section>
 
-<!-- AGGLOMERATION TEXT -->
-<section class="section">
-  <div class="section-inner section-center">
-    <p class="section-text" data-ru-html='Площадка находится в самом центре <strong>Иркутской агломерации</strong> (население &gt; 900 000 человек). Идеально для федеральных сетей и маркетплейсов: <strong>Ozon, «Пятёрочка», AliExpress</strong>.' data-en-html='The site is located in the heart of the <strong>Irkutsk metropolitan area</strong> (population &gt;900,000). Ideal for national retail chains and marketplaces such as <strong>Ozon, Pyaterochka, and AliExpress</strong>.'>Площадка находится в самом центре <strong>Иркутской агломерации</strong> (население &gt; 900 000 человек). Идеально для федеральных сетей и маркетплейсов: <strong>Ozon, «Пятёрочка», AliExpress</strong>.</p>
-    <br>
-    <p class="section-text" data-ru-html='Два участка общей площадью 60 га находятся в <strong>собственности</strong> и имеют полный комплект юридически чистых документов, готовых к сделке.' data-en-html='Two plots, totaling 60 hectares, are <strong>owned</strong> and have a full set of legally clear documents ready for the transaction.'>Два участка общей площадью 60 га находятся в <strong>собственности</strong> и имеют полный комплект юридически чистых документов, готовых к сделке.</p>
+<!-- AGGLOMERATION -->
+<section class="aglo-sec">
+  <div class="sec-inner">
+    <p class="sec-text rv"
+      data-ru-html='Площадка находится в самом центре <strong>Иркутской агломерации</strong> (население &gt; 900&thinsp;000 человек). Идеально для федеральных сетей и маркетплейсов: <strong>Ozon, «Пятёрочка», AliExpress</strong>.'
+      data-en-html='The site is located in the heart of the <strong>Irkutsk metropolitan area</strong> (population &gt;900,000). Ideal for national retail chains and marketplaces such as <strong>Ozon, Pyaterochka, and AliExpress</strong>.'>Площадка находится в самом центре <strong>Иркутской агломерации</strong> (население &gt; 900&thinsp;000 человек). Идеально для федеральных сетей и маркетплейсов: <strong>Ozon, «Пятёрочка», AliExpress</strong>.</p>
+    <div class="gold-line rv" style="margin:2.5rem auto"></div>
+    <p class="sec-text rv"
+      data-ru-html='Два участка общей площадью 60 га находятся в <strong>собственности</strong> и имеют полный комплект юридически чистых документов, готовых к сделке.'
+      data-en-html='Two plots, totaling 60 hectares, are <strong>owned</strong> and have a full set of legally clear documents ready for the transaction.'>Два участка общей площадью 60 га находятся в <strong>собственности</strong> и имеют полный комплект юридически чистых документов, готовых к сделке.</p>
   </div>
 </section>
 
-<!-- OWNERSHIP: text left + combiner photo right -->
-<div class="ownership">
-  <div class="ownership-text">
-    <h2 data-ru="Низкая стоимость владения" data-en="Low Cost of Ownership">Низкая стоимость владения</h2>
-    <p data-ru="Участки в настоящий момент продолжают использоваться для сельскохозяйственного производства, что обеспечивает сохранение низкой кадастровой стоимости. По заявлению правообладателя возможно изменение вида разрешённого использования (ВРИ) на 6.9 — «Склады» в Росреестре." data-en="The plots are currently used for agricultural production, which maintains a low cadastral value. At the request of the rights holder, the permitted use type (PUT) may be changed to 6.9 — 'Warehouses' in Rosreestr.">Участки в настоящий момент продолжают использоваться для сельскохозяйственного производства, что обеспечивает сохранение низкой кадастровой стоимости. По заявлению правообладателя возможно изменение вида разрешённого использования (ВРИ) на 6.9 — «Склады» в Росреестре.</p>
-  </div>
-  <div class="ownership-img">
-    <img src="images/photo.jpg" alt="Сельскохозяйственное использование площадки">
+<!-- OWNERSHIP -->
+<div class="own-sec">
+  <div class="own-grid">
+    <div class="own-text rv">
+      <span class="sec-label" data-ru="ИНВЕСТИЦИОННЫЙ ПОТЕНЦИАЛ" data-en="INVESTMENT POTENTIAL">ИНВЕСТИЦИОННЫЙ ПОТЕНЦИАЛ</span>
+      <h2 data-ru="Низкая стоимость владения" data-en="Low Cost of Ownership">Низкая стоимость владения</h2>
+      <div class="gold-line"></div>
+      <p data-ru="Участки в настоящий момент продолжают использоваться для сельскохозяйственного производства, что обеспечивает сохранение низкой кадастровой стоимости. По заявлению правообладателя возможно изменение вида разрешённого использования (ВРИ) на 6.9 — «Склады» в Росреестре."
+         data-en="The plots are currently used for agricultural production, which maintains a low cadastral value. At the request of the rights holder, the permitted use type (PUT) may be changed to 6.9 — 'Warehouses' in Rosreestr.">Участки в настоящий момент продолжают использоваться для сельскохозяйственного производства, что обеспечивает сохранение низкой кадастровой стоимости. По заявлению правообладателя возможно изменение вида разрешённого использования (ВРИ) на 6.9 — «Склады» в Росреестре.</p>
+    </div>
+    <div class="own-img">
+      <img src="images/photo.jpg" alt="Сельскохозяйственное использование площадки">
+    </div>
   </div>
 </div>
 
 <!-- NEWS -->
-<section class="section" id="news">
-  <div class="section-inner section-center">
-    <h2 class="section-title" data-ru="Новости площадки" data-en="Site News">Новости площадки</h2>
-    <p class="section-subtitle" data-ru="Наши последние новости" data-en="Our latest news">Наши последние новости</p>
-
+<section class="news-sec" id="news">
+  <div class="sec-inner sec-ctr">
+    <span class="sec-label rv" data-ru="ПОСЛЕДНИЕ НОВОСТИ" data-en="LATEST NEWS">ПОСЛЕДНИЕ НОВОСТИ</span>
+    <h2 class="sec-title rv" data-ru="Новости площадки" data-en="Site News">Новости площадки</h2>
     <div class="news-list">
-      <div class="news-item">
-        <img class="news-item-img" src="images/news-investmap.jpg" alt="Инвестиционная карта">
-        <div class="news-item-body">
-          <h3 data-ru="Площадка 'Жемчужина Сибири' официально интегрирована в Инвестиционную карту РФ при поддержке Корпорации развития Иркутской области." data-en="The 'Pearl of Siberia' site has been officially integrated into the RF Investment Map with the support of the Irkutsk Region Development Corporation.">Площадка 'Жемчужина Сибири' официально интегрирована в Инвестиционную карту РФ при поддержке Корпорации развития Иркутской области.</h3>
-          <p data-ru-html='Мы рады сообщить о важном этапе развития нашего проекта: благодаря плодотворному сотрудничеству с Корпорацией развития Иркутской области, информация о площадке «Жемчужина Сибири» теперь доступна на <a href="https://invest.gov.ru/?type=investment-platform-other&amp;objectId=2736594" target="_blank" style="color:var(--accent-dark);font-weight:500">Инвестиционной карте Российской Федерации</a>.' data-en-html='We are pleased to announce an important milestone: thanks to fruitful cooperation with the Irkutsk Region Development Corporation, information about the «Pearl of Siberia» site is now available on the <a href="https://invest.gov.ru/?type=investment-platform-other&amp;objectId=2736594" target="_blank" style="color:var(--accent-dark);font-weight:500">Investment Map of the Russian Federation</a>.'>Мы рады сообщить о важном этапе развития нашего проекта: благодаря плодотворному сотрудничеству с Корпорацией развития Иркутской области, информация о площадке 'Жемчужина Сибири' теперь доступна на <a href="https://invest.gov.ru/?type=investment-platform-other&amp;objectId=2736594" target="_blank" style="color:var(--accent-dark);font-weight:500">Инвестиционной карте Российской Федерации</a>.</p>
-          <div class="news-item-date">07.10.2025</div>
+
+      <div class="news-item rv">
+        <div class="news-img-wrap">
+          <img class="news-img" src="images/news-investmap.jpg" alt="Инвестиционная карта">
+        </div>
+        <div>
+          <span class="news-tag">07.10.2025</span>
+          <h3 data-ru="Площадка «Жемчужина Сибири» официально интегрирована в Инвестиционную карту РФ при поддержке Корпорации развития Иркутской области." data-en="The 'Pearl of Siberia' site has been officially integrated into the RF Investment Map with the support of the Irkutsk Region Development Corporation.">Площадка «Жемчужина Сибири» официально интегрирована в Инвестиционную карту РФ при поддержке Корпорации развития Иркутской области.</h3>
+          <p data-ru-html='Мы рады сообщить о важном этапе развития нашего проекта: благодаря плодотворному сотрудничеству с Корпорацией развития Иркутской области, информация о площадке «Жемчужина Сибири» теперь доступна на <a href="https://invest.gov.ru/?type=investment-platform-other&amp;objectId=2736594" target="_blank">Инвестиционной карте Российской Федерации</a>.'
+             data-en-html='We are pleased to announce an important milestone: thanks to fruitful cooperation with the Irkutsk Region Development Corporation, information about the «Pearl of Siberia» site is now available on the <a href="https://invest.gov.ru/?type=investment-platform-other&amp;objectId=2736594" target="_blank">Investment Map of the Russian Federation</a>.'>Мы рады сообщить о важном этапе развития нашего проекта: благодаря плодотворному сотрудничеству с Корпорацией развития Иркутской области, информация о площадке «Жемчужина Сибири» теперь доступна на <a href="https://invest.gov.ru/?type=investment-platform-other&amp;objectId=2736594" target="_blank">Инвестиционной карте Российской Федерации</a>.</p>
         </div>
       </div>
 
-      <div class="news-item">
-        <img class="news-item-img" src="images/news-geology.jpg" alt="Геологические изыскания">
-        <div class="news-item-body">
+      <div class="news-item rv">
+        <div class="news-img-wrap">
+          <img class="news-img" src="images/news-geology.jpg" alt="Геологические изыскания">
+        </div>
+        <div>
+          <span class="news-tag">04.10.2025</span>
           <h3 data-ru="Инженерно-геологические изыскания" data-en="Engineering and Geological Surveys">Инженерно-геологические изыскания</h3>
           <p data-ru="В сентябре 2025 года на площадке было проведено бурение скважин для определения свойств грунтов." data-en="In September 2025, boreholes were drilled on the site to determine soil properties.">В сентябре 2025 года на площадке было проведено бурение скважин для определения свойств грунтов.</p>
-          <div class="news-item-date">04.10.2025</div>
         </div>
       </div>
 
-      <div class="news-item">
-        <img class="news-item-img" src="images/news-road.jpg" alt="Дорога в Иркутск">
-        <div class="news-item-body">
+      <div class="news-item rv">
+        <div class="news-img-wrap">
+          <img class="news-img" src="images/news-road.jpg" alt="Дорога в Иркутск">
+        </div>
+        <div>
+          <span class="news-tag">04.10.2025</span>
           <h3 data-ru="Асфальтированная дорога в Иркутск-2" data-en="Paved Road to Irkutsk-2">Асфальтированная дорога в Иркутск-2</h3>
           <p data-ru="Открытие асфальтированной дороги в Иркутск по берегу Ангары" data-en="Opening of a paved road to Irkutsk along the Angara riverbank">Открытие асфальтированной дороги в Иркутск по берегу Ангары</p>
-          <div class="news-item-date">04.10.2025</div>
         </div>
       </div>
 
-      <div class="news-item">
-        <img class="news-item-img" src="images/news-viaduct.jpg" alt="Мегетский виадук">
-        <div class="news-item-body">
+      <div class="news-item rv">
+        <div class="news-img-wrap">
+          <img class="news-img" src="images/news-viaduct.jpg" alt="Мегетский виадук">
+        </div>
+        <div>
+          <span class="news-tag">04.10.2025</span>
           <h3 data-ru="Открытие Мегетского виадука" data-en="Opening of the Meget Viaduct">Открытие Мегетского виадука</h3>
-          <p data-ru="Главная новость 2025 года - открытие виадука в Мегете через железнодорожные пути ВСЖД" data-en="The main news of 2025 - opening of the viaduct in Meget across the ESRR railway tracks">Главная новость 2025 года - открытие виадука в Мегете через железнодорожные пути ВСЖД</p>
-          <div class="news-item-date">04.10.2025</div>
+          <p data-ru="Главная новость 2025 года — открытие виадука в Мегете через железнодорожные пути ВСЖД" data-en="The main news of 2025 — opening of the viaduct in Meget across the ESRR railway tracks">Главная новость 2025 года — открытие виадука в Мегете через железнодорожные пути ВСЖД</p>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
 <!-- TRANSPORT QUOTE -->
-<div class="transport-text">
-  <p data-ru-html='Близость к ключевым транспортным артериям региона — федеральной трассе <strong>Р-255</strong> и крупнейшей <strong>ж/д станции Мегет</strong> — обеспечивает бесперебойную и экономически выгодную логистику. Воспользуйтесь этим стратегическим преимуществом для максимальной эффективности вашего бизнеса.' data-en-html='Proximity to the region&apos;s key transportation arteries — the <strong>R-255</strong> federal highway and the largest <strong>Meget railway station</strong> — ensures seamless and cost-effective logistics. Take advantage of this strategic position to maximize the efficiency of your business.'>Близость к ключевым транспортным артериям региона — федеральной трассе <strong>Р-255</strong> и крупнейшей <strong>ж/д станции Мегет</strong> — обеспечивает бесперебойную и экономически выгодную логистику. Воспользуйтесь этим стратегическим преимуществом для максимальной эффективности вашего бизнеса.</p>
+<div class="tq-sec">
+  <div class="sec-inner">
+    <div class="gold-line rv"></div>
+    <blockquote class="rv"
+      data-ru-html='Близость к ключевым транспортным артериям региона — федеральной трассе <strong>Р-255</strong> и крупнейшей <strong>ж/д станции Мегет</strong> — обеспечивает бесперебойную и экономически выгодную логистику. Воспользуйтесь этим стратегическим преимуществом для максимальной эффективности вашего бизнеса.'
+      data-en-html='Proximity to the region&apos;s key transportation arteries — the <strong>R-255</strong> federal highway and the largest <strong>Meget railway station</strong> — ensures seamless and cost-effective logistics. Take advantage of this strategic position to maximize the efficiency of your business.'>Близость к ключевым транспортным артериям региона — федеральной трассе <strong>Р-255</strong> и крупнейшей <strong>ж/д станции Мегет</strong> — обеспечивает бесперебойную и экономически выгодную логистику. Воспользуйтесь этим стратегическим преимуществом для максимальной эффективности вашего бизнеса.</blockquote>
+    <div class="gold-line rv bottom"></div>
+  </div>
 </div>
 
-<!-- GEOLOGY (ИГИ) -->
-<section class="section" style="padding-top:0">
-  <div class="section-inner section-center">
-    <h2 class="section-title" data-ru="Инженерно-геологические изыскания" data-en="Engineering and Geological Surveys">Инженерно-геологические изыскания</h2>
-    <p class="section-subtitle" data-ru="Результаты бурения скважин на участках ЗУ1 и ЗУ2 для определения свойств грунтов и геологического строения площадки" data-en="Results of borehole drilling on plots ZU1 and ZU2 to determine soil properties and geological structure of the site">Результаты бурения скважин на участках ЗУ1 и ЗУ2 для определения свойств грунтов и геологического строения площадки</p>
-    <div class="geology">
-      <img src="images/site-photo-1.jpg" alt="ИГИ 09/25-171" onclick="openLightbox(this)">
-      <img src="images/site-photo-2.jpg" alt="ИГИ 09/25-173" onclick="openLightbox(this)">
+<!-- GEOLOGY -->
+<section class="geo-sec">
+  <div class="sec-inner sec-ctr">
+    <span class="sec-label rv" data-ru="ГОТОВНОСТЬ К СТРОИТЕЛЬСТВУ" data-en="CONSTRUCTION READINESS">ГОТОВНОСТЬ К СТРОИТЕЛЬСТВУ</span>
+    <h2 class="sec-title rv" data-ru="Инженерно-геологические изыскания" data-en="Engineering and Geological Surveys">Инженерно-геологические изыскания</h2>
+    <p class="sec-sub rv"
+      data-ru="Результаты бурения скважин на участках ЗУ1 и ЗУ2 для определения свойств грунтов и геологического строения площадки"
+      data-en="Results of borehole drilling on plots ZU1 and ZU2 to determine soil properties and geological structure of the site">Результаты бурения скважин на участках ЗУ1 и ЗУ2 для определения свойств грунтов и геологического строения площадки</p>
+    <div class="geo-grid">
+      <div class="geo-item rv" onclick="openLb('images/site-photo-1.jpg','ИГИ 09/25-171')">
+        <img src="images/site-photo-1.jpg" alt="ИГИ 09/25-171">
+        <div class="geo-overlay">
+          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        </div>
+      </div>
+      <div class="geo-item rv rv-1" onclick="openLb('images/site-photo-2.jpg','ИГИ 09/25-173')">
+        <img src="images/site-photo-2.jpg" alt="ИГИ 09/25-173">
+        <div class="geo-overlay">
+          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- GPZU -->
-<section class="section">
-  <div class="section-inner">
-    <h2 class="section-title section-center" data-ru="Виды разрешённого использования" data-en="Types of Permitted Use">Виды разрешённого использования</h2>
+<section class="gpzu-sec">
+  <div class="sec-inner">
+    <h2 class="sec-title sec-ctr rv" data-ru="Виды разрешённого использования" data-en="Types of Permitted Use">Виды разрешённого использования</h2>
     <div class="gpzu-grid">
       <div class="gpzu-text">
-        <h3 data-ru="Градостроительный план земельного участка (ГПЗУ)" data-en="Urban Development Plan (GPZU)">Градостроительный план земельного участка (ГПЗУ)</h3>
-        <p data-ru="Согласно Генеральному плану и Правилам землепользования и застройки Ангарского городского округа, на площадке предусмотрены следующие виды разрешённого использования: складские объекты, объекты бытового обслуживания, магазины, деловое управление, служебные гаражи, а также вспомогательные виды использования. Максимальный процент застройки — до 80%, предельная высота — 20 метров." data-en="According to the General Plan and Land Use Regulations of the Angarsk Urban District, the site permits the following types of use: warehouse facilities, service objects, retail, business management, service garages, and auxiliary uses. Maximum development coverage is up to 80%, with a height limit of 20 meters.">Согласно Генеральному плану и Правилам землепользования и застройки Ангарского городского округа, на площадке предусмотрены следующие виды разрешённого использования: складские объекты, объекты бытового обслуживания, магазины, деловое управление, служебные гаражи, а также вспомогательные виды использования. Максимальный процент застройки — до 80%, предельная высота — 20 метров.</p>
+        <span class="sec-label rv" data-ru="ДОКУМЕНТАЦИЯ" data-en="DOCUMENTATION">ДОКУМЕНТАЦИЯ</span>
+        <h3 class="rv" data-ru="Градостроительный план земельного участка (ГПЗУ)" data-en="Urban Development Plan (GPZU)">Градостроительный план земельного участка (ГПЗУ)</h3>
+        <p class="rv"
+          data-ru="Согласно Генеральному плану и Правилам землепользования и застройки Ангарского городского округа, на площадке предусмотрены следующие виды разрешённого использования: складские объекты, объекты бытового обслуживания, магазины, деловое управление, служебные гаражи, а также вспомогательные виды использования. Максимальный процент застройки — до 80%, предельная высота — 20 метров."
+          data-en="According to the General Plan and Land Use Regulations of the Angarsk Urban District, the site permits the following types of use: warehouse facilities, service objects, retail, business management, service garages, and auxiliary uses. Maximum development coverage is up to 80%, with a height limit of 20 meters.">Согласно Генеральному плану и Правилам землепользования и застройки Ангарского городского округа, на площадке предусмотрены следующие виды разрешённого использования: складские объекты, объекты бытового обслуживания, магазины, деловое управление, служебные гаражи, а также вспомогательные виды использования. Максимальный процент застройки — до 80%, предельная высота — 20 метров.</p>
       </div>
-      <div class="gpzu-img">
-        <img src="images/gpzu.jpg" alt="ГПЗУ — Виды разрешённого использования" onclick="openLightbox(this)">
+      <div class="gpzu-img rv rv-1" onclick="openLb('images/gpzu.jpg','ГПЗУ — Виды разрешённого использования')">
+        <img src="images/gpzu.jpg" alt="ГПЗУ — Виды разрешённого использования">
       </div>
     </div>
   </div>
 </section>
 
 <!-- CONTACTS -->
-<section class="section contacts-section" id="contacts">
-  <div class="section-inner">
-    <h2 class="section-title" data-ru="Contacts" data-en="Contacts">Contacts</h2>
-    <p class="contacts-info" data-ru="Информация о нашей площадке представлена во всех крупных агентствах недвижимости России, занимающихся складской и индустриальной недвижимостью." data-en="Information about our site is available in all major Russian real estate agencies specializing in warehouse and industrial real estate.">Информация о нашей площадке представлена во всех крупных агентствах недвижимости России, занимающихся складской и индустриальной недвижимостью.</p>
-    <p class="contacts-email" data-ru="Для связи с собственником:" data-en="To contact the owner:">Для связи с собственником:</p>
-    <p class="contacts-email"><strong>Email:</strong> <a href="mailto:investsiberiapearl@gmail.com">investsiberiapearl@gmail.com</a></p>
-    <a href="https://t.me/" class="tg-icon" aria-label="Telegram">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.53 8.12l-1.8 8.49c-.13.6-.5.74-.99.46l-2.74-2.02-1.32 1.27c-.15.15-.27.27-.55.27l.2-2.79 5.07-4.58c.22-.2-.05-.3-.34-.12l-6.27 3.95-2.7-.84c-.59-.18-.6-.59.12-.87l10.55-4.07c.49-.18.91.12.75.87z"/></svg>
-    </a>
+<section class="ct-sec" id="contacts">
+  <div class="sec-inner">
+    <span class="sec-label rv" data-ru="СВЯЗАТЬСЯ С НАМИ" data-en="GET IN TOUCH">СВЯЗАТЬСЯ С НАМИ</span>
+    <h2 class="sec-title rv" data-ru="Contacts" data-en="Contacts">Contacts</h2>
+    <p class="ct-desc rv"
+      data-ru="Информация о нашей площадке представлена во всех крупных агентствах недвижимости России, занимающихся складской и индустриальной недвижимостью."
+      data-en="Information about our site is available in all major Russian real estate agencies specializing in warehouse and industrial real estate.">Информация о нашей площадке представлена во всех крупных агентствах недвижимости России, занимающихся складской и индустриальной недвижимостью.</p>
+    <div class="ct-email-wrap rv">
+      <span class="ct-label" data-ru="Email собственника" data-en="Owner's Email">Email собственника</span>
+      <a href="mailto:investsiberiapearl@gmail.com" class="ct-email">investsiberiapearl@gmail.com</a>
+    </div>
+    <div class="rv">
+      <a href="https://t.me/" class="tg-btn" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.53 8.12l-1.8 8.49c-.13.6-.5.74-.99.46l-2.74-2.02-1.32 1.27c-.15.15-.27.27-.55.27l.2-2.79 5.07-4.58c.22-.2-.05-.3-.34-.12l-6.27 3.95-2.7-.84c-.59-.18-.6-.59.12-.87l10.55-4.07c.49-.18.91.12.75.87z"/></svg>
+        <span data-ru="Написать в Telegram" data-en="Message on Telegram">Написать в Telegram</span>
+      </a>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
-  <p>© 2025 <span data-ru="Жемчужина Сибири" data-en="Pearl of Siberia">Жемчужина Сибири</span></p>
+  <p>© 2025 <span data-ru="Жемчужина Сибири" data-en="Pearl of Siberia">Жемчужина Сибири</span> &nbsp;·&nbsp; <span data-ru="Ангарский городской округ, Иркутская область" data-en="Angarsk Urban District, Irkutsk Region">Ангарский городской округ, Иркутская область</span></p>
 </footer>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <button class="lightbox-close" onclick="closeLightbox()">×</button>
-  <img id="lightboxImg" src="" alt="">
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLb()">&#x2715;</button>
+  <img id="lbImg" src="" alt="">
 </div>
 
 <script>
-// Language
+// LANGUAGE
 function setLang(lang){
   document.querySelectorAll('[data-ru]').forEach(el=>{
-    el.textContent=el.getAttribute('data-'+lang);
+    const v=el.getAttribute('data-'+lang);
+    if(v!==null)el.textContent=v;
   });
   document.querySelectorAll('[data-ru-html]').forEach(el=>{
-    el.innerHTML=el.getAttribute('data-'+lang+'-html');
+    const v=el.getAttribute('data-'+lang+'-html');
+    if(v!==null)el.innerHTML=v;
   });
   document.querySelectorAll('.lang-switch button').forEach(btn=>{
-    const v=btn.textContent.trim().toLowerCase();
-    btn.classList.toggle('active',v===lang||(v==='eng'&&lang==='en'));
+    const t=btn.textContent.trim().toLowerCase();
+    btn.classList.toggle('active',t===lang||(t==='eng'&&lang==='en'));
   });
   document.documentElement.lang=lang==='ru'?'ru':'en';
 }
 
-// Mobile menu
-document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+// NAV SCROLL STATE
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>60);
+},{passive:true});
 
-// Smooth scroll
+// HERO PARALLAX
+const heroBg=document.getElementById('heroBg');
+window.addEventListener('scroll',()=>{
+  if(window.scrollY<window.innerHeight)
+    heroBg.style.transform='translateY('+window.scrollY*.32+'px)';
+},{passive:true});
+
+// MOBILE MENU
+function toggleMenu(){
+  const l=document.getElementById('navLinks');
+  const b=document.getElementById('burger');
+  l.classList.toggle('open');
+  b.classList.toggle('open');
+}
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('burger').classList.remove('open');
+}));
+
+// SMOOTH SCROLL
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
+    const h=a.getAttribute('href');
+    if(h==='#')return;
     e.preventDefault();
-    const t=document.querySelector(a.getAttribute('href'));
-    if(t)window.scrollTo({top:t.offsetTop-60,behavior:'smooth'});
+    const t=document.querySelector(h);
+    if(t)window.scrollTo({top:t.offsetTop-70,behavior:'smooth'});
   });
 });
 
-// Carousel
+// CAROUSEL
 let ci=0;
-const track=document.getElementById('carouselTrack');
-const sc=track?track.children.length:0;
-function moveCarousel(dir){ci=(ci+dir+sc)%sc;track.style.transform=`translateX(-${ci*100}%)`}
-
-// Map click-to-scroll
-function activateMap(){
-  document.getElementById('mapOverlay').classList.add('active');
+const track=document.getElementById('carTrack');
+const slides=track?track.children.length:2;
+function updCar(){
+  track.style.transform='translateX(-'+ci*100+'%)';
+  document.querySelectorAll('.car-dot').forEach((d,i)=>d.classList.toggle('active',i===ci));
 }
+function moveCar(d){ci=(ci+d+slides)%slides;updCar()}
+function goSlide(n){ci=n;updCar()}
+setInterval(()=>moveCar(1),5500);
+
+// MAP CLICK-TO-ACTIVATE
+function activateMap(){document.getElementById('mapOverlay').classList.add('active')}
 document.addEventListener('click',e=>{
-  if(!document.getElementById('mapWrap').contains(e.target)){
-    document.getElementById('mapOverlay').classList.remove('active');
-  }
+  const w=document.getElementById('mapWrap');
+  if(w&&!w.contains(e.target))document.getElementById('mapOverlay').classList.remove('active');
 });
 
-// Lightbox
-function openLightbox(img){document.getElementById('lightboxImg').src=img.src;document.getElementById('lightbox').classList.add('active')}
-function closeLightbox(){document.getElementById('lightbox').classList.remove('active')}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
+// LIGHTBOX
+function openLb(src,alt){
+  document.getElementById('lbImg').src=src;
+  document.getElementById('lbImg').alt=alt||'';
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeLb(){
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow='';
+}
+document.getElementById('lightbox').addEventListener('click',function(e){
+  if(e.target===this)closeLb();
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
+
+// SCROLL REVEAL
+const rvEls=document.querySelectorAll('.rv');
+const rvObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('on');rvObs.unobserve(e.target)}
+  });
+},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+rvEls.forEach(el=>rvObs.observe(el));
+
+// STAT COUNTERS
+const counters=document.querySelectorAll('.stat-num[data-target]');
+let counted=false;
+const cObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting&&!counted){
+    counted=true;
+    counters.forEach(el=>{
+      const target=parseInt(el.getAttribute('data-target'));
+      const sfx=el.getAttribute('data-suffix')||'';
+      let cur=0;
+      const step=target/60;
+      const t=setInterval(()=>{
+        cur+=step;
+        if(cur>=target){cur=target;clearInterval(t)}
+        el.textContent=Math.round(cur)+sfx;
+      },16);
+    });
+    cObs.disconnect();
+  }
+},{threshold:.2});
+const sb=document.querySelector('.stats-bar');
+if(sb)cObs.observe(sb);
 </script>
 </body>
 </html>
