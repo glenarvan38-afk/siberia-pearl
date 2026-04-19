@@ -108,8 +108,8 @@ body{font-family:var(--font-b);background:var(--bg);color:var(--text);line-heigh
 .carousel{position:relative;width:100%;overflow:hidden;background:#000}
 .car-track{display:flex;transition:transform .75s cubic-bezier(.25,.46,.45,.94)}
 .car-slide{min-width:100%;position:relative}
-.car-slide img{width:100%;height:88vh;min-height:480px;object-fit:cover;display:block;opacity:.87}
-.car-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.52) 0%,transparent 55%)}
+.car-slide img{width:100%;height:88vh;min-height:480px;object-fit:cover;display:block;opacity:1}
+.car-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.18) 0%,transparent 40%)}
 .car-caption{position:absolute;bottom:3rem;left:3rem;z-index:1;text-align:left}
 .car-caption-label{display:block;font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
 .car-caption-title{font-family:var(--font-d);font-size:1.5rem;font-weight:600;color:#fff;letter-spacing:.06em;text-shadow:0 2px 12px rgba(0,0,0,.4)}
@@ -130,7 +130,7 @@ body{font-family:var(--font-b);background:var(--bg);color:var(--text);line-heigh
 .dir-card{background:var(--bg-dark2);transition:background .3s}
 .dir-card:hover{background:#1a2235}
 .dir-card-img-wrap{overflow:hidden;height:215px}
-.dir-card-img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;display:block}
+.dir-card-img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease,filter .6s ease;display:block;filter:brightness(1.18)}
 .dir-card:hover .dir-card-img{transform:scale(1.06)}
 .dir-card-body{padding:1.8rem 2rem;border-top:1px solid rgba(255,255,255,.05)}
 .dir-accent{width:28px;height:2px;background:var(--accent);margin-bottom:.9rem;transition:width .3s}
